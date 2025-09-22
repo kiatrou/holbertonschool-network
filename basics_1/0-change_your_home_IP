@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script that configures Ubuntu server to change localhost and facebook.com resolution
 
 # Backup the original /etc/hosts file
