@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ss -tulp
+netstat -plant | grep LISTEN
