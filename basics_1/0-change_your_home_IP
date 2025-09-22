@@ -5,8 +5,8 @@
 sudo cp /etc/hosts /etc/hosts.backup
 
 # Filter out existing localhost and facebook.com entries, then add our new ones
-sudo grep -v 'localhost' /etc/hosts > /tmp/hosts_temp
-sudo grep -v 'facebook.com' /tmp/hosts_temp > /tmp/hosts_temp2
+sudo grep -v 'localhost' /etc/hosts | sudo tee /tmp/hosts_temp > /dev/null
+sudo grep -v 'facebook.com' /tmp/hosts_temp | sudo tee /tmp/hosts_temp2 > /dev/null
 
 # Add our custom entries
 echo "127.0.0.2 localhost" | sudo tee -a /tmp/hosts_temp2 > /dev/null
