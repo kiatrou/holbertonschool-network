@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-netstat -tlnp
-# could also use ss -tlnp
+ss -tlnp
