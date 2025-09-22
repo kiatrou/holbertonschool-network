@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 # Script that configures Ubuntu server to change localhost and facebook.com resolution
 
-# Backup the original /etc/hosts file
-cp /etc/hosts /etc/hosts.backup
+# Create a new hosts file with our custom entries
+sudo cp /etc/hosts /etc/hosts.backup
 
-# Update /etc/hosts with new IP mappings
-# Remove any existing localhost entries and add our custom ones
-sed -i '/localhost/d' /etc/hosts
-sed -i '/facebook.com/d' /etc/hosts
+# Filter out existing localhost and facebook.com entries, then add our new ones
+sudo grep -v 'localhost' /etc/hosts > /tmp/hosts_temp
+sudo grep -v 'facebook.com' /tmp/hosts_temp > /tmp/hosts_temp2
 
-# Add the new entries
-echo "127.0.0.2 localhost" >> /etc/hosts
-echo "8.8.8.8 facebook.com" >> /etc/hosts
+# Add our custom entries
+echo "127.0.0.2 localhost" | sudo tee -a /tmp/hosts_temp2 > /dev/null
+echo "8.8.8.8 facebook.com" | sudo tee -a /tmp/hosts_temp2 > /dev/null
+
+# Replace the original file
+sudo cp /tmp/hosts_temp2 /etc/hosts
+
+# Clean up temp files
+sudo rm -f /tmp/hosts_temp /tmp/hosts_temp2
